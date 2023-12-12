@@ -11,8 +11,8 @@ data class Gamer(var name: String, var email: String) : Recommendable {
                 createInternalID()
             }
         }
-    private var id = 0
-    var internalID: String? = null
+    var id = 0
+    private var internalID: String? = null
     var plan: Plan = LoosePlan("BRONZE")
     val searchedGames = mutableListOf<Game?>()
     private val rentedGames = mutableListOf<Rent>()
@@ -31,8 +31,8 @@ data class Gamer(var name: String, var email: String) : Recommendable {
         recommendedGames.add(game)
     }
 
-    constructor(nome: String, email: String, birthDate: String, user: String, id: Int = 0) :
-            this(nome, email) {
+    constructor(name: String, email: String, birthDate: String, user: String, id: Int = 0) :
+            this(name, email) {
         this.birthDate = birthDate
         this.user = user
         this.id = id
@@ -41,7 +41,7 @@ data class Gamer(var name: String, var email: String) : Recommendable {
 
     init {
         if (name.isBlank()) {
-            throw IllegalArgumentException("Nome está em branco")
+            throw IllegalArgumentException("Name is empty!")
         }
         this.email = validateEmail()
     }

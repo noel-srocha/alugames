@@ -6,9 +6,11 @@ data class Game(
     @Expose val title: String,
     @Expose val thumb: String
 ) : Recommendable {
+    var id = 0
     var description: String? = null
     var price = 0.0
-    var id = 0
+
+
     private val ratingsList = mutableListOf<Int>()
     override val average: Double
         get() = ratingsList.average()
