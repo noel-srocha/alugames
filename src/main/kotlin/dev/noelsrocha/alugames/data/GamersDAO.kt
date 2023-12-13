@@ -4,8 +4,13 @@ import dev.noelsrocha.alugames.models.Gamer
 import dev.noelsrocha.alugames.models.GamerEntity
 import javax.persistence.EntityManager
 
-class GamersDAO(val manager: EntityManager) {
-    fun getGamers(): List<Gamer> {
+class GamersDAO(val manager: EntityManager) : BaseDAO<Gamer>(manager) {
+    override fun toEntity(value: Gamer): GamerEntity {
+        return GamerEntity(value.name, value.email, value.birthDate, value.user, value.id)
+    }
+
+
+    override fun getList(): List<Gamer> {
         val query = manager.createQuery("FROM GamerEntity", GamerEntity::class.java)
 
         return query.resultList.map { entity ->
@@ -23,15 +28,15 @@ class GamersDAO(val manager: EntityManager) {
         }
     }
 
-    fun insertGamer(gamer: Gamer) {
-        val entity = gamer.user?.let { user ->
-            gamer.birthDate?.let { birthDate ->
+    override fun insert(value: Gamer) {
+        val entity = value.user?.let { user ->
+            value.birthDate?.let { birthDate ->
                 GamerEntity(
-                    gamer.name,
-                    gamer.email,
+                    value.name,
+                    value.email,
                     birthDate,
                     user,
-                    gamer.id
+                    value.id
                 )
             }
         }

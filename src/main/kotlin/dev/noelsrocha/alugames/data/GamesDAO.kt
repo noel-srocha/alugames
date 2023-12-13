@@ -4,8 +4,12 @@ import dev.noelsrocha.alugames.models.Game
 import dev.noelsrocha.alugames.models.GameEntity
 import javax.persistence.EntityManager
 
-class GamesDAO(val manager: EntityManager) {
-    fun getGames(): List<Game> {
+class GamesDAO(val manager: EntityManager) : BaseDAO<Game>(manager) {
+    override fun toEntity(value: Game): GameEntity {
+        return GameEntity(value.title, value.thumb, value.price, value.description, value.id)
+    }
+
+    override fun getList(): List<Game> {
         val query = manager.createQuery("FROM GameEntity", GameEntity::class.java)
 
         return query.resultList.map { entity ->
@@ -19,12 +23,5 @@ class GamesDAO(val manager: EntityManager) {
                 )
             }!!
         }
-    }
-
-    fun insertGame(game: Game) {
-        val entity = GameEntity(game.title, game.thumb, game.price, game.description)
-        manager.transaction.begin()
-        manager.persist(entity)
-        manager.transaction.commit()
     }
 }
