@@ -1,4 +1,4 @@
-package dev.noelsrocha.alugames.models
+package dev.noelsrocha.alugames.models.entities
 
 import javax.persistence.*
 

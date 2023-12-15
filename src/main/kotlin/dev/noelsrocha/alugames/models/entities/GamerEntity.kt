@@ -1,4 +1,4 @@
-package dev.noelsrocha.alugames.models
+package dev.noelsrocha.alugames.models.entities
 
 import javax.persistence.*
 
@@ -9,6 +9,8 @@ open class GamerEntity(
     val email: String = "Email",
     val birthDate: String? = null,
     val user: String? = null,
+    @ManyToOne
+    val plan: PlanEntity = LoosePlanEntity(),
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int = 0,

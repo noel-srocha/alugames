@@ -6,9 +6,9 @@ data class Game(
     @Expose val title: String,
     @Expose val thumb: String
 ) : Recommendable {
-    var id = 0
-    var description: String? = null
     var price = 0.0
+    var description: String? = null
+    var id = 0
 
 
     private val ratingsList = mutableListOf<Int>()
@@ -19,7 +19,7 @@ data class Game(
         ratingsList.add(rating)
     }
 
-    constructor(title: String, thumb: String, price: Double, description: String, id: Int = 0) :
+    constructor(title: String, thumb: String, price: Double, description: String?, id: Int = 0) :
             this(title, thumb) {
         this.price = price
         this.description = description

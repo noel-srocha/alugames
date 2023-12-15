@@ -31,7 +31,7 @@ data class Gamer(var name: String, var email: String) : Recommendable {
         recommendedGames.add(game)
     }
 
-    constructor(name: String, email: String, birthDate: String, user: String, id: Int = 0) :
+    constructor(name: String, email: String, birthDate: String?, user: String?, id: Int = 0) :
             this(name, email) {
         this.birthDate = birthDate
         this.user = user
